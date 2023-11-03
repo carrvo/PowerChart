@@ -1,9 +1,18 @@
+Import-Module .\bin\Debug\net6.0-windows\PowerChart.dll
+
 Describe "PowerChart API" {
-	BeforeAll {
-		Import-Module .\bin\Debug\net6.0-windows\PowerChart.dll
-	}
 	It "Shows Chart" {
 		$chart = New-Chart
+		Show-Chart -Chart $chart
+	}
+	It "Shows Points" {
+		$chart = New-Chart
+		Add-Scatter -Chart $chart -XCoordinate 10 -YCoordinate 50
+		Add-Scatter -Chart $chart -XCoordinate 20 -YCoordinate 100
+		Add-Scatter -Chart $chart -XCoordinate 30 -YCoordinate 50
+		$chart.Title = 'Shows Points'
+		$chart.XAxisLabel = 'time'
+		$chart.YAxisLabel = 'Energy'
 		Show-Chart -Chart $chart
 	}
 }

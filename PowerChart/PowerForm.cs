@@ -15,23 +15,70 @@ namespace PowerChart
     /// </summary>
     public partial class PowerForm : Form
     {
+        IList<Point> ScatterPoints { get; }
+
+        /// <summary>
+        /// Title of the Chart.
+        /// </summary>
+        public String Title
+        {
+            get => lblTitle.Text;
+            set => lblTitle.Text = value;
+        }
+
+        /// <summary>
+        /// Label for x-axis.
+        /// </summary>
+        public String XAxisLabel
+        {
+            get => lblXAxis.Text;
+            set => lblXAxis.Text = value;
+        }
+
+        /// <summary>
+        /// Label for y-axis.
+        /// </summary>
+        public String YAxisLabel
+        {
+            get => lblYAxis.Text;
+            set => lblYAxis.Text = value;
+        }
+
         /// <summary>
         /// Constructor.
         /// </summary>
         public PowerForm()
         {
             InitializeComponent();
+            ScatterPoints = new List<Point>();
         }
 
-        private void PowerForm_Paint(object sender, PaintEventArgs e)
+        private void pnlMain_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             Pen pen = new Pen(Color.LimeGreen);
             pen.Width = 2;
-            Point P1 = new Point(0, this.Height);
-            Point P2 = new Point(this.Width, 0);
 
-            g.DrawLine(pen, P1, P2);
+            Int32 axisOrigin = lblYAxis.Width + 10;
+            Int32 axisHeight = pnlMain.Height - axisOrigin;
+            Int32 axisWidth = pnlMain.Width - axisOrigin;
+
+            // y axis
+            g.DrawLine(pen, new Point(axisOrigin, axisOrigin), new Point(axisOrigin, axisHeight));
+
+            // x axis
+            g.DrawLine(pen, new Point(axisOrigin, axisHeight), new Point(axisWidth, axisHeight));
+
+            foreach (var point in ScatterPoints)
+            {
+                Point chartPoint = new(point.X + axisOrigin, axisHeight - point.Y);
+                g.DrawEllipse(pen, new Rectangle(chartPoint, new Size(2, 2)));
+            }
+        }
+
+        internal void AddScatterPoint(Int32 x, Int32 y)
+        {
+            ScatterPoints.Add(new Point(x, y));
         }
     }
 }

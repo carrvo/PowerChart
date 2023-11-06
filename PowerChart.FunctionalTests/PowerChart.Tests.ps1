@@ -1,4 +1,4 @@
-Import-Module .\PowerChart.dll
+Import-Module $PSScriptRoot\..\bin\Debug\net6.0-windows\PowerChart.dll
 
 Describe "PowerChart API" {
 	It "Shows Chart" {

@@ -1,4 +1,4 @@
-Import-Module .\bin\Debug\net6.0-windows\PowerChart.dll
+Import-Module .\PowerChart.dll
 
 Describe "PowerChart API" {
 	It "Shows Chart" {

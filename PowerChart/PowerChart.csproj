@@ -14,14 +14,4 @@
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="PowerChart.Tests.ps1">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="PowerShell.exe -C &quot;Set-Location '$(OutputPath)'; Invoke-Pester&quot;" />
-  </Target>
-
 </Project>

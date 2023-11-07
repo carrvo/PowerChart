@@ -21,25 +21,40 @@ namespace PowerChart
         [ValidateNotNull]
         public PowerForm? Chart { get; set; }
 
+        /// <summary>
+        /// X coordinate for a point on the chart.
+        /// </summary>
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = "Single Point")]
         [ValidateNotNull]
         public Int32 XCoordinate { get; set; }
 
+        /// <summary>
+        /// Y coordinate for a point on the chart.
+        /// </summary>
         [Parameter(Mandatory = true, Position = 2, ParameterSetName = "Single Point")]
         [ValidateNotNull]
         public Int32 YCoordinate { get; set; }
 
+        /// <summary>
+        /// <see cref="PSObject"/> whose properties are used for charting.
+        /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "Properties")]
         [ValidateNotNull]
-        public PSObject InputObject { get; set; }
+        public PSObject InputObject { get; set; } = new();
 
+        /// <summary>
+        /// <see cref="InputObject"/> property to use as an x coordinate for a point on the chart.
+        /// </summary>
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = "Properties")]
         [ValidateNotNull]
-        public String XProperty { get; set; }
+        public String XProperty { get; set; } = String.Empty;
 
+        /// <summary>
+        /// <see cref="InputObject"/> property to use as an y coordinate for a point on the chart.
+        /// </summary>
         [Parameter(Mandatory = true, Position = 2, ParameterSetName = "Properties")]
         [ValidateNotNull]
-        public String YProperty { get; set; }
+        public String YProperty { get; set; } = String.Empty;
 
         /// <inheritdoc/>
         protected override void ProcessRecord()
@@ -68,7 +83,7 @@ namespace PowerChart
             }
         }
 
-        private Int32 CastProperty(PSPropertyInfo property)
+        private static Int32 CastProperty(PSPropertyInfo property)
         {
             if (property.TypeNameOfValue == typeof(Int32).FullName)
             {

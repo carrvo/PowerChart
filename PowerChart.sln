@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerChart", "PowerChart\PowerChart.csproj", "{C8A5818B-DCF9-4B34-9C4A-348488AEC0DF}"
 EndProject
 Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "PowerChart.FunctionalTests", "PowerChart.FunctionalTests\PowerChart.FunctionalTests.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C8A5818B-DCF9-4B34-9C4A-348488AEC0DF} = {C8A5818B-DCF9-4B34-9C4A-348488AEC0DF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

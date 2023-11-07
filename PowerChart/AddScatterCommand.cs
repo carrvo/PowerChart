@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Management.Automation;
 
 namespace PowerChart
@@ -64,8 +63,8 @@ namespace PowerChart
                 switch (ParameterSetName)
                 {
                     case "Properties":
-                        XCoordinate = CastProperty(InputObject.Properties.Single(x => x.Name == XProperty));
-                        YCoordinate = CastProperty(InputObject.Properties.Single(x => x.Name == YProperty));
+                        XCoordinate = CastProperty(InputObject.Properties[XProperty]);
+                        YCoordinate = CastProperty(InputObject.Properties[YProperty]);
                         break;
                     default:
                         break;

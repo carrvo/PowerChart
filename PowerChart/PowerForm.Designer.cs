@@ -1,4 +1,7 @@
-﻿namespace PowerChart
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace PowerChart
 {
     partial class PowerForm
     {

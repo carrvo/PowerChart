@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +17,11 @@ namespace PowerChart
     public partial class PowerForm : Form
     {
         IList<Point> ScatterPoints { get; }
+
+        /// <summary>
+        /// Reference to the <see cref="Thread"/> that the dialog box is running on.
+        /// </summary>
+        public Thread Dialog { get; internal set; }
 
         /// <summary>
         /// Title of the Chart.

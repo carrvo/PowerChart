@@ -25,7 +25,19 @@ namespace PowerChart
         /// <inheritdoc/>
         protected override void ProcessRecord()
         {
-            new Thread(new ThreadStart(() => Chart?.ShowDialog())).Start();
+            if (Chart is null)
+            {
+                WriteError(new ErrorRecord(
+                    new PSArgumentException($"Argument {nameof(Chart)} is null"),
+                    "Argument null",
+                    ErrorCategory.InvalidArgument,
+                    Chart
+                ));
+                return;
+            }
+
+            Chart.Dialog = new Thread(new ThreadStart(() => Chart.ShowDialog()));
+            Chart.Dialog.Start();
         }
     }
 }

@@ -4,6 +4,7 @@ Describe "PowerChart API" {
 	It "Shows Chart" {
 		$chart = New-Chart
 		Show-Chart -Chart $chart
+		$chart.Dialog.Join()
 	}
 	It "Shows Points" {
 		$chart = New-Chart
@@ -14,6 +15,7 @@ Describe "PowerChart API" {
 		Add-Scatter -Chart $chart -XCoordinate 20 -YCoordinate 100
 		Add-Scatter -Chart $chart -XCoordinate 30 -YCoordinate 50
 		Show-Chart -Chart $chart
+		$chart.Dialog.Join()
 	}
 	It "Draws a Scatter Chart" {
 		$chart = New-Chart
@@ -22,5 +24,6 @@ Describe "PowerChart API" {
 		$chart.YAxisLabel = 'CPU'
 		Get-Process | Add-Scatter $chart -XProperty Id -YProperty CPU
 		Show-Chart -Chart $chart
+		$chart.Dialog.Join()
 	}
 }

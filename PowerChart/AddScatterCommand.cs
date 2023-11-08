@@ -84,6 +84,11 @@ namespace PowerChart
 
         private static Int32 CastProperty(PSPropertyInfo property)
         {
+            if (property.Value is null)
+            {
+                throw new ArgumentException($"Property value of {property.Name} is null.");
+            }
+
             if (property.TypeNameOfValue == typeof(Int32).FullName)
             {
                 return (Int32)property.Value;
@@ -99,7 +104,7 @@ namespace PowerChart
             }
             else
             {
-                throw new ArgumentException($"Property value of {property.Name} is unsupported type {property.TypeNameOfValue} ({property.Value?.GetType()?.FullName}).");
+                throw new ArgumentException($"Property value of {property.Name} is unsupported type {property.TypeNameOfValue} ({property.Value?.GetType()?.FullName}): {property.Value}");
             }
         }
     }

@@ -66,20 +66,46 @@ namespace PowerChart
             pen.Width = 2;
 
             Int32 axisOrigin = lblYAxis.Width + 10;
-            Int32 axisHeight = pnlMain.Height - axisOrigin;
-            Int32 axisWidth = pnlMain.Width - axisOrigin;
+            Int32 axisYEnd = pnlMain.Height - axisOrigin;
+            Int32 axisXEnd = pnlMain.Width - axisOrigin;
+            Int32 axisHeight = axisYEnd - axisOrigin;
+            Int32 axisWidth = axisXEnd - axisOrigin;
 
             // y axis
-            g.DrawLine(pen, new Point(axisOrigin, axisOrigin), new Point(axisOrigin, axisHeight));
+            g.DrawLine(pen, new Point(axisOrigin, axisOrigin), new Point(axisOrigin, axisYEnd));
 
             // x axis
-            g.DrawLine(pen, new Point(axisOrigin, axisHeight), new Point(axisWidth, axisHeight));
+            g.DrawLine(pen, new Point(axisOrigin, axisYEnd), new Point(axisXEnd, axisYEnd));
+
+            var stats = GetDataStatistics(ScatterPoints);
 
             foreach (var point in ScatterPoints)
             {
-                Point chartPoint = new(point.X + axisOrigin, axisHeight - point.Y);
+                // Get the data scaled to the data itself
+                Double xScale = (Double)(point.X - stats.xMin) / stats.xRange;
+                Double yScale = (Double)(point.Y - stats.yMin) / stats.yRange;
+                // Convert and scale to the drawing
+                Int32 x = (Int32)(xScale * axisWidth);
+                Int32 y = (Int32)(yScale * axisHeight);
+
+                Point chartPoint = new(x + axisOrigin, axisYEnd - y);
                 g.DrawEllipse(pen, new Rectangle(chartPoint, new Size(2, 2)));
             }
+        }
+
+        private (Int32 xMin, Int32 xMax, Int32 xRange, Int32 yMin, Int32 yMax, Int32 yRange) GetDataStatistics(IEnumerable<Point> dataseries)
+        {
+            (Int32 xMin, Int32 xMax, Int32 xRange, Int32 yMin, Int32 yMax, Int32 yRange) stats = new(Int32.MaxValue, Int32.MinValue, 0, Int32.MaxValue, Int32.MinValue, 0);
+            foreach (var point in dataseries)
+            {
+                if (point.X < stats.xMin) stats.xMin = point.X;
+                if (point.X > stats.xMax) stats.xMax = point.X;
+                if (point.Y < stats.yMin) stats.yMin = point.Y;
+                if (point.Y > stats.yMax) stats.yMax = point.Y;
+            }
+            stats.xRange = stats.xMax - stats.xMin;
+            stats.yRange = stats.yMax - stats.yMin;
+            return stats;
         }
 
         internal void AddScatterPoint(Int32 x, Int32 y)

@@ -22,7 +22,7 @@ Describe "PowerChart API" {
 		$chart.Title = 'Get-Process'
 		$chart.XAxisLabel = 'Process ID'
 		$chart.YAxisLabel = 'CPU'
-		Get-Process | Add-Scatter $chart -XProperty Id -YProperty CPU
+		Get-Process | Add-Scatter $chart -XProperty Id -YProperty CPU -ErrorAction SilentlyContinue
 		Show-Chart -Chart $chart
 		$chart.Dialog.Join()
 	}

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PowerChart.Scatter;
+using System;
+using System.Drawing;
 using System.Management.Automation;
 
 namespace PowerChart
@@ -55,6 +57,16 @@ namespace PowerChart
         [ValidateNotNull]
         public String YProperty { get; set; } = String.Empty;
 
+        private ScatterSeries? Series { get; set; } = null;
+
+        /// <inheritdoc/>
+        protected override void BeginProcessing()
+        {
+            Pen pen = new Pen(Color.Red);
+            Series = new(pen);
+            Chart?.Series?.Add(Series);
+        }
+
         /// <inheritdoc/>
         protected override void ProcessRecord()
         {
@@ -69,7 +81,7 @@ namespace PowerChart
                     default:
                         break;
                 }
-                Chart?.AddScatterPoint(XCoordinate, YCoordinate);
+                Series?.AddPoint(XCoordinate, YCoordinate);
             }
             catch (ArgumentException ex)
             {

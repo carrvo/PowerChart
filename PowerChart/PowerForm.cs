@@ -47,6 +47,11 @@ namespace PowerChart
         }
 
         /// <summary>
+        /// The <see cref="Color"/> of the axis lines.
+        /// </summary>
+        public Color AxisColor { get; set; } = Color.Black;
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public PowerForm()
@@ -58,7 +63,7 @@ namespace PowerChart
         private void pnlMain_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            Pen pen = new Pen(Color.LimeGreen);
+            Pen pen = new Pen(AxisColor);
             pen.Width = 2;
 
             Int32 axisOrigin = lblYAxis.Width + 10;

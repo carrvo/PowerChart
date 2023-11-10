@@ -62,7 +62,10 @@ namespace PowerChart
         /// </summary>
         [Parameter(Mandatory = false, Position = 3)]
         [ValidateNotNull]
-        public Color Color { get; set; } = Color.LimeGreen;
+        public Color Color { get; set; } = Color.FromKnownColor((KnownColor)ColorPicker.NextInt64(0, KnownColorMax));
+
+        private static Int32 KnownColorMax = Enum.GetValues(typeof(KnownColor)).Length;
+        private static Random ColorPicker = new(0);
 
         private ScatterSeries? Series { get; set; } = null;
 

@@ -11,6 +11,7 @@ Describe "PowerChart API" {
 		$chart.Title = 'Shows Points'
 		$chart.XAxisLabel = 'time'
 		$chart.YAxisLabel = 'Energy'
+		$chart.BackColor = 'Cyan'
 		Add-Scatter -Chart $chart -XCoordinate 10 -YCoordinate 50 -Color Red
 		Add-Scatter -Chart $chart -XCoordinate 20 -YCoordinate 100 -Color Red
 		Add-Scatter -Chart $chart -XCoordinate 30 -YCoordinate 50 -Color Red

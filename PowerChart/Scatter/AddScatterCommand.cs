@@ -57,12 +57,19 @@ namespace PowerChart
         [ValidateNotNull]
         public String YProperty { get; set; } = String.Empty;
 
+        /// <summary>
+        /// <para type="description"><see cref="Color"/> to draw with.</para>
+        /// </summary>
+        [Parameter(Mandatory = false, Position = 3)]
+        [ValidateNotNull]
+        public Color Color { get; set; } = Color.LimeGreen;
+
         private ScatterSeries? Series { get; set; } = null;
 
         /// <inheritdoc/>
         protected override void BeginProcessing()
         {
-            Pen pen = new Pen(Color.Red);
+            Pen pen = new Pen(Color);
             Series = new(pen);
             Chart?.Series?.Add(Series);
         }

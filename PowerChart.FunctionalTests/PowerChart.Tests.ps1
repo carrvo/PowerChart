@@ -11,9 +11,9 @@ Describe "PowerChart API" {
 		$chart.Title = 'Shows Points'
 		$chart.XAxisLabel = 'time'
 		$chart.YAxisLabel = 'Energy'
-		Add-Scatter -Chart $chart -XCoordinate 10 -YCoordinate 50
-		Add-Scatter -Chart $chart -XCoordinate 20 -YCoordinate 100
-		Add-Scatter -Chart $chart -XCoordinate 30 -YCoordinate 50
+		Add-Scatter -Chart $chart -XCoordinate 10 -YCoordinate 50 -Color Red
+		Add-Scatter -Chart $chart -XCoordinate 20 -YCoordinate 100 -Color Red
+		Add-Scatter -Chart $chart -XCoordinate 30 -YCoordinate 50 -Color Red
 		Show-Chart -Chart $chart
 		$chart.Dialog.Join()
 	}
@@ -22,7 +22,7 @@ Describe "PowerChart API" {
 		$chart.Title = 'Get-Process'
 		$chart.XAxisLabel = 'Process ID'
 		$chart.YAxisLabel = 'CPU'
-		Get-Process | Add-Scatter $chart -XProperty Id -YProperty CPU -ErrorAction SilentlyContinue
+		Get-Process | Add-Scatter $chart -XProperty Id -YProperty CPU -Color Red -ErrorAction SilentlyContinue
 		Show-Chart -Chart $chart
 		$chart.Dialog.Join()
 	}

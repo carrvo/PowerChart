@@ -15,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="PowerChart.psd1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="PowerChart.Types.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

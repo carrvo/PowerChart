@@ -1,4 +1,5 @@
 Import-Module $PSScriptRoot\..\bin\Debug\net6.0-windows\PowerChart.dll
+Update-TypeData -AppendPath $PSScriptRoot\..\bin\Debug\net6.0-windows\PowerChart.Types.ps1xml
 
 Describe "PowerChart API" {
 	It "Shows Chart" {

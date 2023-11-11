@@ -62,18 +62,18 @@ namespace PowerChart
         /// </summary>
         [Parameter(Mandatory = false, Position = 3)]
         [ValidateNotNull]
-        public Color Color { get; set; } = Color.FromKnownColor((KnownColor)ColorPicker.NextInt64(0, KnownColorMax));
+        public Pen Color { get; set; } = new(NextColor);
 
         private static Int32 KnownColorMax = Enum.GetValues(typeof(KnownColor)).Length;
         private static Random ColorPicker = new(0);
+        private static Color NextColor => System.Drawing.Color.FromKnownColor((KnownColor) ColorPicker.NextInt64(0, KnownColorMax));
 
         private ScatterSeries? Series { get; set; } = null;
 
         /// <inheritdoc/>
         protected override void BeginProcessing()
         {
-            Pen pen = new Pen(Color);
-            Series = new(pen);
+            Series = new(Color);
             Chart?.Series?.Add(Series);
         }
 

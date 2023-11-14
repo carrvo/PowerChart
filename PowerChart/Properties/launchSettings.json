@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "pwsh - Pester": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "commandLineArgs": "-C Invoke-Pester",
+      "workingDirectory": "$(MSBuildProjectDirectory)\\.."
+    }
+  }
+}

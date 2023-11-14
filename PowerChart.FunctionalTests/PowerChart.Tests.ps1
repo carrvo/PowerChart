@@ -1,4 +1,4 @@
-#Requires -Module ..\bin\Debug\net6.0-windows\PowerChart.psd1
+using module ..\bin\Debug\net6.0-windows\PowerChart.psd1
 
 Describe "PowerChart API" {
 	It "Shows Chart" {

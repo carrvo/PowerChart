@@ -52,6 +52,32 @@ namespace PowerChart
         public Color AxisColor { get; set; } = Color.Black;
 
         /// <summary>
+        /// The minimum Y value from all data points.
+        /// </summary>
+        public Int32 DataYMin => Series.Any() ? Series.Min(x => x.yMin) : Int32.MinValue;
+
+        /// <summary>
+        /// The maximum Y value from all data points.
+        /// </summary>
+        public Int32 DataYMax => Series.Any() ? Series.Max(x => x.yMax) : Int32.MaxValue;
+
+        /// <summary>
+        /// Optionally specify an override for <see cref="DataYMin"/>.
+        /// </summary>
+        /// <remarks>
+        /// Remove override by setting to <see cref="Int32.MinValue"/>.
+        /// </remarks>
+        public Int32 YMin { get; set; } = Int32.MinValue;
+
+        /// <summary>
+        /// Optionally specify an override for <see cref="DataYMax"/>.
+        /// </summary>
+        /// <remarks>
+        /// Remove override by setting to <see cref="Int32.MaxValue"/>.
+        /// </remarks>
+        public Int32 YMax { get; set; } = Int32.MaxValue;
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public PowerForm()
@@ -79,9 +105,18 @@ namespace PowerChart
             g.DrawLine(pen, new Point(axisOrigin, axisYEnd), new Point(axisXEnd, axisYEnd));
 
             Int32 xOverallMin = Series.Any() ? Series.Min(x => x.xMin) : 0;
-            Int32 yOverallMin = Series.Any() ? Series.Min(x => x.yMin) : 0;
             Int32 xOverallRange = Series.Any() ? Series.Max(x => x.xMax) - xOverallMin : 1;
-            Int32 yOverallRange = Series.Any() ? Series.Max(x => x.yMax) - yOverallMin : 1;
+
+            Int32 yOverallMin = YMin != Int32.MinValue
+                ? YMin // specified override
+                : DataYMin != Int32.MinValue
+                    ? DataYMin // from data
+                    : 0; // default when no value
+            Int32 yOverallRange = YMax != Int32.MaxValue
+                ? YMax - yOverallMin // specify override
+                : DataYMax != Int32.MaxValue
+                    ? DataYMax - yOverallMin // from data
+                    : 1; // default when no value
 
             Point TransformationToChart(Point dataPoint)
             {

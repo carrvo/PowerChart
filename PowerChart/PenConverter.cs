@@ -15,7 +15,7 @@ namespace PowerChart
 
         /// <inheritdoc/>
         public override bool CanConvertTo(object sourceValue, Type destinationType)
-            => sourceValue.GetType() == typeof(String) && destinationType == typeof(Pen);
+            => throw new NotImplementedException();
 
         /// <inheritdoc/>
         public override object ConvertFrom(object sourceValue, Type destinationType, IFormatProvider formatProvider, bool ignoreCase)
@@ -23,6 +23,6 @@ namespace PowerChart
 
         /// <inheritdoc/>
         public override object ConvertTo(object sourceValue, Type destinationType, IFormatProvider formatProvider, bool ignoreCase)
-            => new Pen(Color.FromName((String)sourceValue));
+            => throw new NotImplementedException();
     }
 }

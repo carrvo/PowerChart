@@ -64,6 +64,13 @@ namespace PowerChart
         [ValidateNotNull]
         public Pen Color { get; set; } = new(NextColor);
 
+        /// <summary>
+        /// <para type="description">Set the size of the <see cref="Pen.Width"/>.</para>
+        /// </summary>
+        [Parameter(Mandatory = false, Position = 3)]
+        [ValidateNotNull]
+        public Single Size { get; set; } = default;
+
         private static Int32 KnownColorMax = Enum.GetValues(typeof(KnownColor)).Length;
         private static Random ColorPicker = new(0);
         private static Color NextColor => System.Drawing.Color.FromKnownColor((KnownColor) ColorPicker.NextInt64(0, KnownColorMax));
@@ -73,6 +80,10 @@ namespace PowerChart
         /// <inheritdoc/>
         protected override void BeginProcessing()
         {
+            if (Size != default)
+            {
+                Color.Width = Size;
+            }
             Series = new(Color);
             Chart?.Series?.Add(Series);
         }

@@ -14,8 +14,8 @@ Describe "PowerChart API" {
 		$chart.BackColor = 'Cyan'
 		$chart.AxisColor = 'LimeGreen'
 		Add-Scatter -Chart $chart -XCoordinate 10 -YCoordinate 50 -Color Red
-		Add-Scatter -Chart $chart -XCoordinate 20 -YCoordinate 100 -Color Red
-		Add-Scatter -Chart $chart -XCoordinate 30 -YCoordinate 50 -Color Red
+		Add-Scatter -Chart $chart -XCoordinate 20 -YCoordinate 100 -Color Red -Size 5
+		Add-Scatter -Chart $chart -XCoordinate 30 -YCoordinate 50 -Color Red -Size 10.5
 		Show-Chart -Chart $chart
 		$chart.Dialog.Join()
 	}

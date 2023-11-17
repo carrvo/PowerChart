@@ -26,13 +26,13 @@ namespace PowerChart.Scatter
             }
         }
 
-        public override void Draw(Graphics g, Func<Point, Point> transform)
+        public override void Draw(Graphics g, Func<Point, Point> scale)
         {
             lock (DataPoints)
             {
                 foreach (var point in DataPoints)
                 {
-                    var chartPoint = transform(point);
+                    var chartPoint = scale(point);
                     var position = new Rectangle(chartPoint, new Size(2, 2));
                     g.DrawEllipse(Pen, position);
                 }

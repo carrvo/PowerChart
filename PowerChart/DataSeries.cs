@@ -23,6 +23,6 @@ namespace PowerChart
             Pen = pen;
         }
 
-        public abstract void Draw(Graphics g, Func<Point, Point> transform);
+        public abstract void Draw(Graphics g, Func<Point, Point> scale);
     }
 }

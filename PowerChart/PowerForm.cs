@@ -118,7 +118,7 @@ namespace PowerChart
                     ? DataYMax - yOverallMin // from data
                     : 1; // default when no value
 
-            Point TransformationToChart(Point dataPoint)
+            Point NormalizeForChart(Point dataPoint)
             {
                 // Get the data scaled to the data itself (across all series)
                 Double xScale = (Double)(dataPoint.X - xOverallMin) / xOverallRange;
@@ -133,7 +133,7 @@ namespace PowerChart
 
             foreach (var series in Series)
             {
-                series.Draw(g, TransformationToChart);
+                series.Draw(g, NormalizeForChart);
             }
         }
     }

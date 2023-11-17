@@ -83,23 +83,22 @@ namespace PowerChart
             Int32 xOverallRange = Series.Any() ? Series.Max(x => x.xMax) - xOverallMin : 1;
             Int32 yOverallRange = Series.Any() ? Series.Max(x => x.yMax) - yOverallMin : 1;
 
+            Point TransformationToChart(Point dataPoint)
+            {
+                // Get the data scaled to the data itself (across all series)
+                Double xScale = (Double)(dataPoint.X - xOverallMin) / xOverallRange;
+                Double yScale = (Double)(dataPoint.Y - yOverallMin) / yOverallRange;
+                // Convert and scale to the drawing
+                Int32 x = (Int32)(xScale * axisWidth);
+                Int32 y = (Int32)(yScale * axisHeight);
+
+                Point chartPoint = new(x + axisOrigin, axisYEnd - y);
+                return chartPoint;
+            }
+
             foreach (var series in Series)
             {
-                lock (series.DataPoints)
-                {
-                    foreach (var point in series.DataPoints)
-                    {
-                        // Get the data scaled to the data itself (across all series)
-                        Double xScale = (Double)(point.X - xOverallMin) / xOverallRange;
-                        Double yScale = (Double)(point.Y - yOverallMin) / yOverallRange;
-                        // Convert and scale to the drawing
-                        Int32 x = (Int32)(xScale * axisWidth);
-                        Int32 y = (Int32)(yScale * axisHeight);
-
-                        Point chartPoint = new(x + axisOrigin, axisYEnd - y);
-                        series.Draw(g, new Rectangle(chartPoint, new Size(2, 2)));
-                    }
-                }
+                series.Draw(g, TransformationToChart);
             }
         }
     }

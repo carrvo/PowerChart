@@ -7,7 +7,7 @@ namespace PowerChart
 {
     public abstract class DataSeries
     {
-        internal IList<Point> DataPoints { get; }
+        protected IList<Point> DataPoints { get; }
         public Pen Pen { get; set; }
 
         public Int32 xMin { get; protected set; } = Int32.MaxValue;
@@ -23,6 +23,6 @@ namespace PowerChart
             Pen = pen;
         }
 
-        public abstract void Draw(Graphics g, Rectangle position);
+        public abstract void Draw(Graphics g, Func<Point, Point> transform);
     }
 }

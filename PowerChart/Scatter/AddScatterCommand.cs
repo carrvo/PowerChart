@@ -72,7 +72,7 @@ namespace PowerChart
         public Single Size { get; set; } = default;
 
         private static Int32 KnownColorMax = Enum.GetValues(typeof(KnownColor)).Length;
-        private static Random ColorPicker = new(0);
+        private static Random ColorPicker = new((Int32)DateTime.Now.Ticks);
         private static Color NextColor => System.Drawing.Color.FromKnownColor((KnownColor) ColorPicker.NextInt64(0, KnownColorMax));
 
         private ScatterSeries? Series { get; set; } = null;

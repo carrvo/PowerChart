@@ -23,7 +23,7 @@ Describe "PowerChart API" {
 	}
 	It "Draws a Scatter Chart" {
 		$chart = New-Chart
-		$chart.Title = 'Get-Process'
+		$chart.Title = 'Get-Process (single)'
 		$chart.XAxisLabel = 'Process ID'
 		$chart.YAxisLabel = 'CPU'
 		Get-Process | Add-Scatter -Chart $chart -XProperty Id -YProperty CPU -Color Red -ErrorAction SilentlyContinue
@@ -32,7 +32,7 @@ Describe "PowerChart API" {
 	}
 	It "Draws multiple Scatter" {
 		$chart = New-Chart
-		$chart.Title = 'Get-ChildItem'
+		$chart.Title = 'Get-Process (multiple)'
 		$chart.XAxisLabel = 'Process ID'
 		$chart.YAxisLabel = 'CPU/ID'
 		$processes = Get-Process

@@ -30,7 +30,7 @@ CompanyName = 'carrvo'
 Copyright = '(c) carrvo. All rights reserved.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = 'Charting in PowerShell'
 
 # Minimum version of the PowerShell engine required by this module
 # PowerShellVersion = ''

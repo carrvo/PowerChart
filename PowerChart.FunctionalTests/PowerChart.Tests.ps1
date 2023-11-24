@@ -30,4 +30,15 @@ Describe "PowerChart API" {
 		Show-Chart -Chart $chart
 		$chart.Dialog.Join()
 	}
+	It "Draws multiple Scatter" {
+		$chart = New-Chart
+		$chart.Title = 'Get-ChildItem'
+		$chart.XAxisLabel = 'Process ID'
+		$chart.YAxisLabel = 'CPU/ID'
+		$processes = Get-Process
+		$processes | Add-Scatter -Chart $chart -XProperty Id -YProperty CPU -Color Red -ErrorAction SilentlyContinue
+		$processes | Add-Scatter -Chart $chart -XProperty Id -YProperty Id -Color Green -ErrorAction SilentlyContinue
+		Show-Chart -Chart $chart
+		$chart.Dialog.Join()
+	}
 }

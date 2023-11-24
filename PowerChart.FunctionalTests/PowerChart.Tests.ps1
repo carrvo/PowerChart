@@ -41,4 +41,13 @@ Describe "PowerChart API" {
 		Show-Chart -Chart $chart
 		$chart.Dialog.Join()
 	}
+	It "Draws a Line Chart" {
+		$chart = New-Chart
+		$chart.Title = 'Get-Process'
+		$chart.XAxisLabel = 'Process ID'
+		$chart.YAxisLabel = 'CPU'
+		Get-Process | Add-Line -Chart $chart -XProperty Id -YProperty CPU -Color Red -ErrorAction SilentlyContinue
+		Show-Chart -Chart $chart
+		$chart.Dialog.Join()
+	}
 }

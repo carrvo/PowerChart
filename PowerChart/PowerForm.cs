@@ -97,6 +97,8 @@ namespace PowerChart
             Int32 axisXEnd = pnlMain.Width - axisOrigin;
             Int32 axisHeight = axisYEnd - axisOrigin;
             Int32 axisWidth = axisXEnd - axisOrigin;
+            Int32 tickLength = 5;
+            Int32 tickFontSize = 12;
 
             // y axis
             g.DrawLine(pen, new Point(axisOrigin, axisOrigin), new Point(axisOrigin, axisYEnd));
@@ -117,6 +119,28 @@ namespace PowerChart
                 : DataYMax != Int32.MaxValue
                     ? DataYMax - yOverallMin // from data
                     : 1; // default when no value
+
+            using (Font tickFont = new Font("Times New Roman", tickFontSize, FontStyle.Regular, GraphicsUnit.Pixel))
+            {
+                var tickFormat = new StringFormat();
+
+                // y axis ticks
+                tickFormat.Alignment = StringAlignment.Far;
+                tickFormat.LineAlignment = StringAlignment.Center;
+                g.DrawLine(pen, new Point(axisOrigin, axisOrigin), new Point(axisOrigin - tickLength, axisOrigin));
+                g.DrawLine(pen, new Point(axisOrigin, axisYEnd), new Point(axisOrigin - tickLength, axisYEnd));
+                g.DrawString(yOverallMin.ToString(), tickFont, Brushes.Black, new Point(axisOrigin - tickLength, axisYEnd), tickFormat);
+                g.DrawString((yOverallMin + yOverallRange).ToString(), tickFont, Brushes.Black, new Point(axisOrigin - tickLength, axisOrigin), tickFormat);
+
+                // x axis ticks
+                tickFormat.Alignment = StringAlignment.Center;
+                tickFormat.LineAlignment = StringAlignment.Near;
+                //tickFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+                g.DrawLine(pen, new Point(axisOrigin, axisYEnd), new Point(axisOrigin, axisYEnd + tickLength));
+                g.DrawLine(pen, new Point(axisXEnd, axisYEnd), new Point(axisXEnd, axisYEnd + tickLength));
+                g.DrawString(xOverallMin.ToString(), tickFont, Brushes.Black, new Point(axisOrigin, axisYEnd + tickLength), tickFormat);
+                g.DrawString((xOverallMin + xOverallRange).ToString(), tickFont, Brushes.Black, new Point(axisXEnd, axisYEnd + tickLength), tickFormat);
+            }
 
             Point NormalizeForChart(Point dataPoint)
             {

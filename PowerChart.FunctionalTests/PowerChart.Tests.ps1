@@ -50,4 +50,30 @@ Describe "PowerChart API" {
 		Show-Chart -Chart $chart
 		$chart.Dialog.Join()
 	}
+	It "Draws a Bar Chart" {
+		$chart = New-Chart
+		$chart.Title = 'Get-Process (bar)'
+		$chart.XAxisLabel = 'Process ID'
+		$chart.YAxisLabel = 'CPU'
+		Get-Process -PipelineVariable process |
+			Where-Object CPU -LT 30 |
+			ForEach-Object { # ensures CPU is minimum of 1
+				switch ($process) {
+					{$_.CPU -LT 1} {
+						$p = [PSCustomObject]@{
+							Id = $_.Id
+							CPU = 1
+						}
+						Write-Output $p
+					}
+					default {
+						Write-Output $_
+					}
+				}
+			} |
+			Add-Bar -Chart $chart -XProperty Id -YProperty CPU -Color Red -ErrorAction SilentlyContinue
+		$chart.YMin = 0
+		Show-Chart -Chart $chart
+		$chart.Dialog.Join()
+	}
 }

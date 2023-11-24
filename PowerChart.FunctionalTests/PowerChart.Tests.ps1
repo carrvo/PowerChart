@@ -26,7 +26,7 @@ Describe "PowerChart API" {
 		$chart.Title = 'Get-Process'
 		$chart.XAxisLabel = 'Process ID'
 		$chart.YAxisLabel = 'CPU'
-		Get-Process | Add-Scatter $chart -XProperty Id -YProperty CPU -Color Red -ErrorAction SilentlyContinue
+		Get-Process | Add-Scatter -Chart $chart -XProperty Id -YProperty CPU -Color Red -ErrorAction SilentlyContinue
 		Show-Chart -Chart $chart
 		$chart.Dialog.Join()
 	}

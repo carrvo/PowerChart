@@ -1,4 +1,11 @@
-using module ..\bin\Debug\net6.0-windows\PowerChart.psd1
+switch ($PSVersionTable.PSVersion.Major) {
+	5 {
+		Import-Module $PSScriptRoot\..\bin\Debug\net48-framework\PowerChart.psd1
+		Update-TypeData -AppendPath $PSScriptRoot\..\bin\Debug\net48-framework\PowerChart.Types.ps1xml
+	}
+	7 {Import-Module $PSScriptRoot\..\bin\Debug\net6.0-windows\PowerChart.psd1}
+	default {Import-Module $PSScriptRoot\..\bin\Debug\net6.0-windows\PowerChart.psd1}
+}
 
 Describe "PowerChart API" {
 	It "Shows Chart" {

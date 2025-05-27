@@ -151,7 +151,7 @@ namespace PowerChart
                 Int32 x = (Int32)(xScale * axisWidth);
                 Int32 y = (Int32)(yScale * axisHeight);
 
-                Point chartPoint = new(x + axisOrigin, axisYEnd - y);
+                Point chartPoint = new Point(x + axisOrigin, axisYEnd - y);
                 return chartPoint;
             }
 

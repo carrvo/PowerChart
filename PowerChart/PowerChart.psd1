@@ -33,7 +33,7 @@ Copyright = '(c) carrvo. All rights reserved.'
 Description = 'Charting in PowerShell'
 
 # Minimum version of the PowerShell engine required by this module
-PowerShellVersion = '7.0'
+PowerShellVersion = if ($PSEdition -eq 'Desktop') { '5.1' } else { '7.0' }
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
@@ -42,7 +42,7 @@ PowerShellVersion = '7.0'
 # PowerShellHostVersion = ''
 
 # Minimum version of Microsoft .NET Framework required by this module. This prerequisite is valid for the PowerShell Desktop edition only.
-# DotNetFrameworkVersion = ''
+DotNetFrameworkVersion = if ($PSEdition -eq 'Desktop') { '4.8' } else { '' }
 
 # Minimum version of the common language runtime (CLR) required by this module. This prerequisite is valid for the PowerShell Desktop edition only.
 # ClrVersion = ''
@@ -60,7 +60,7 @@ PowerShellVersion = '7.0'
 # ScriptsToProcess = @()
 
 # Type files (.ps1xml) to be loaded when importing this module
-TypesToProcess = @('PowerChart.Types.ps1xml')
+TypesToProcess = if ($PSEdition -eq 'Desktop') { @() } else { @('PowerChart.Types.ps1xml') }
 
 # Format files (.ps1xml) to be loaded when importing this module
 # FormatsToProcess = @()

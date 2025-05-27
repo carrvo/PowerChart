@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Types>
-  <Type>
-     <Name>System.Drawing.Pen</Name>
-     <TypeConverter>
-       <TypeName>PowerChart.PenConverter</TypeName>
-     </TypeConverter>
-    </Type>
-</Types>

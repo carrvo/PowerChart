@@ -20,7 +20,7 @@ namespace PowerChart.Bar
         /// </summary>
         [Parameter(Mandatory = true, Position = 0)]
         [ValidateNotNull]
-        public PowerForm? Chart { get; set; }
+        public PowerForm Chart { get; set; }
 
         /// <summary>
         /// X coordinate for a bar on the chart.
@@ -41,7 +41,7 @@ namespace PowerChart.Bar
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = "Properties")]
         [ValidateNotNull]
-        public PSObject InputObject { get; set; } = new();
+        public PSObject InputObject { get; set; } = new PSObject();
 
         /// <summary>
         /// <see cref="InputObject"/> property to use as an x coordinate for a bar on the chart.
@@ -62,7 +62,7 @@ namespace PowerChart.Bar
         /// </summary>
         [Parameter(Mandatory = false, Position = 3)]
         [ValidateNotNull]
-        public Pen Color { get; set; } = new(NextColor);
+        public Pen Color { get; set; } = new Pen(NextColor);
 
         /// <summary>
         /// <para type="description">Set the size of the <see cref="Pen.Width"/>.</para>
@@ -72,10 +72,14 @@ namespace PowerChart.Bar
         public Single Size { get; set; } = default;
 
         private static Int32 KnownColorMax = Enum.GetValues(typeof(KnownColor)).Length;
-        private static Random ColorPicker = new((Int32)DateTime.Now.Ticks);
+        private static Random ColorPicker = new Random((Int32)DateTime.Now.Ticks);
+#if NET5_0_OR_GREATER
         private static Color NextColor => System.Drawing.Color.FromKnownColor((KnownColor)ColorPicker.NextInt64(0, KnownColorMax));
+#else
+        private static Color NextColor => System.Drawing.Color.FromKnownColor((KnownColor)ColorPicker.Next(0, KnownColorMax));
+#endif
 
-        private VerticalBarSeries? Series { get; set; } = null;
+        private VerticalBarSeries Series { get; set; } = null;
 
         /// <inheritdoc/>
         protected override void BeginProcessing()
@@ -84,7 +88,7 @@ namespace PowerChart.Bar
             {
                 Color.Width = Size;
             }
-            Series = new(Color);
+            Series = new VerticalBarSeries(Color);
             Chart?.Series?.Add(Series);
         }
 

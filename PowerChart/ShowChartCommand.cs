@@ -20,7 +20,7 @@ namespace PowerChart
         /// </summary>
         [Parameter(Mandatory=true, Position=0)]
         [ValidateNotNull]
-        public PowerForm? Chart { get; set; }
+        public PowerForm Chart { get; set; }
 
         /// <inheritdoc/>
         protected override void ProcessRecord()

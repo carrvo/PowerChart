@@ -12,7 +12,7 @@
 RootModule = if ($PSEdition -eq 'Desktop') { 'net481/PowerChart.dll' } else { 'net6.0-windows/PowerChart.dll' }
 
 # Version number of this module.
-ModuleVersion = '0.0.3'
+ModuleVersion = '0.0.4'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()

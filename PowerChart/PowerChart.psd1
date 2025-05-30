@@ -60,7 +60,7 @@ DotNetFrameworkVersion = if ($PSEdition -eq 'Desktop') { '4.8' } else { '' }
 # ScriptsToProcess = @()
 
 # Type files (.ps1xml) to be loaded when importing this module
-TypesToProcess = if ($PSEdition -eq 'Desktop') { @() } else { @('PowerChart.Types.ps1xml') }
+TypesToProcess = if ($PSEdition -eq 'Desktop') { $null } else { @('PowerChart.Types.ps1xml') }
 
 # Format files (.ps1xml) to be loaded when importing this module
 # FormatsToProcess = @()

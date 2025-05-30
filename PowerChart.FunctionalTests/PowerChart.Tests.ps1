@@ -1,10 +1,10 @@
 switch ($PSVersionTable.PSVersion.Major) {
 	5 {
-		Import-Module $PSScriptRoot\..\bin\Debug\net481\PowerChart.psd1
-		Update-TypeData -AppendPath $PSScriptRoot\..\bin\Debug\net481\PowerChart.Types.ps1xml
+		Import-Module $PSScriptRoot\..\bin\Debug\PowerChart.psd1
+		Update-TypeData -AppendPath $PSScriptRoot\..\bin\Debug\PowerChart.Types.ps1xml
 	}
-	7 {Import-Module $PSScriptRoot\..\bin\Debug\net6.0-windows\PowerChart.psd1}
-	default {Import-Module $PSScriptRoot\..\bin\Debug\net6.0-windows\PowerChart.psd1}
+	7 {Import-Module $PSScriptRoot\..\bin\Debug\PowerChart.psd1}
+	default {Import-Module $PSScriptRoot\..\bin\Debug\PowerChart.psd1}
 }
 
 Describe "PowerChart API" {

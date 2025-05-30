@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'PowerChart.dll'
+RootModule = if ($PSEdition -eq 'Desktop') { 'net481/PowerChart.dll' } else { 'net6.0-windows/PowerChart.dll' }
 
 # Version number of this module.
 ModuleVersion = '0.0.3'
@@ -87,7 +87,7 @@ AliasesToExport = '*'
 # ModuleList = @()
 
 # List of all files packaged with this module
-FileList = @('PowerChart.Types.ps1xml')
+FileList = if ($PSEdition -eq 'Desktop') { @('net481/PowerChart.Types.ps1xml') } else { @('net6.0-windows/PowerChart.Types.ps1xml') }
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{

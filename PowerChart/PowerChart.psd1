@@ -9,10 +9,10 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'PowerChart.dll'
+RootModule = if ($PSEdition -eq 'Desktop') { 'net481/PowerChart.dll' } else { 'net6.0-windows/PowerChart.dll' }
 
 # Version number of this module.
-ModuleVersion = '0.0.3'
+ModuleVersion = '0.0.4'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -33,7 +33,7 @@ Copyright = '(c) carrvo. All rights reserved.'
 Description = 'Charting in PowerShell'
 
 # Minimum version of the PowerShell engine required by this module
-PowerShellVersion = '7.0'
+PowerShellVersion = if ($PSEdition -eq 'Desktop') { '5.1' } else { '7.0' }
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
@@ -42,7 +42,7 @@ PowerShellVersion = '7.0'
 # PowerShellHostVersion = ''
 
 # Minimum version of Microsoft .NET Framework required by this module. This prerequisite is valid for the PowerShell Desktop edition only.
-# DotNetFrameworkVersion = ''
+DotNetFrameworkVersion = if ($PSEdition -eq 'Desktop') { '4.8' } else { '' }
 
 # Minimum version of the common language runtime (CLR) required by this module. This prerequisite is valid for the PowerShell Desktop edition only.
 # ClrVersion = ''
@@ -60,7 +60,7 @@ PowerShellVersion = '7.0'
 # ScriptsToProcess = @()
 
 # Type files (.ps1xml) to be loaded when importing this module
-TypesToProcess = @('PowerChart.Types.ps1xml')
+TypesToProcess = if ($PSEdition -eq 'Desktop') { $null } else { @('PowerChart.Types.ps1xml') }
 
 # Format files (.ps1xml) to be loaded when importing this module
 # FormatsToProcess = @()
@@ -87,7 +87,7 @@ AliasesToExport = '*'
 # ModuleList = @()
 
 # List of all files packaged with this module
-FileList = @('PowerChart.Types.ps1xml')
+FileList = if ($PSEdition -eq 'Desktop') { @('net481/PowerChart.Types.ps1xml') } else { @('net6.0-windows/PowerChart.Types.ps1xml') }
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
